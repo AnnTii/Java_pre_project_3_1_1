@@ -21,18 +21,18 @@ public class UsersController {
     }
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String getAllUsersPage(Model model) {
         model.addAttribute("user", userService.getAllUsers());
         return "main";
     }
 
     @GetMapping(value = "/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String getNewUserPage(@ModelAttribute("user") User user) {
         return "new";
     }
 
     @PostMapping
-    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String addNewUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return "new";
         }
@@ -41,7 +41,7 @@ public class UsersController {
     }
 
     @GetMapping(value = "/{id}/edit")
-    public String editUser(Model model, @PathVariable("id") int id) {
+    public String getEditUserPage(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
